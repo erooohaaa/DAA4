@@ -45,7 +45,7 @@ public class Main {
 
                 System.out.println("\n" + "─".repeat(70));
             }
-            System.out.println("\n✅ Completed analysis of " + files.length + " datasets");
+            System.out.println("\nCompleted analysis of " + files.length + " datasets");
         } else {
             System.out.println("No JSON files found in data/ directory");
             System.out.println("Usage: java -jar DAA4.jar <input_json_file>");
