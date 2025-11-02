@@ -90,8 +90,8 @@ mvn test
 # Build package
 mvn clean package
 ```
-Project Structure
-text
+##Project Structure
+
 DAA4/
 ├── data/               # 9 generated datasets
 ├── src/
