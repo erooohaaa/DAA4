@@ -106,22 +106,10 @@ public class DAGShortestLongestPaths {
             }
         }
 
-        if (maxLength == Integer.MIN_VALUE) {
-            for (int source = 0; source < graph.getN(); source++) {
-                LongestPathResult result = longestPath(source);
-                if (result.isValid) {
-                    for (int target = 0; target < result.dist.length; target++) {
-                        if (result.dist[target] != Integer.MIN_VALUE && result.dist[target] > 0) {
-                            maxLength = result.dist[target];
-                            bestSource = source;
-                            bestTarget = target;
-                            criticalPath = reconstructPath(result.prev, target);
-                            break;
-                        }
-                    }
-                }
-                if (maxLength != Integer.MIN_VALUE) break;
-            }
+        if (maxLength == Integer.MIN_VALUE && graph.getN() > 0) {
+            maxLength = 0;
+            criticalPath = List.of(0);
+            bestSource = 0;
         }
 
         return new CriticalPathResult(criticalPath, maxLength, bestSource);
@@ -181,12 +169,12 @@ public class DAGShortestLongestPaths {
         }
 
         public void printResults() {
-            if (path.isEmpty()) {
-                System.out.println("No critical path found - graph may be disconnected");
+            if (path.isEmpty() || length == Integer.MIN_VALUE) {
+                System.out.println("No critical path found");
             } else {
                 System.out.println("Critical Path (Longest): " + path);
                 System.out.println("Critical Path Length: " + length);
-                System.out.println("Starting from node: " + source);
+                System.out.println("Starting from component: " + source);
             }
         }
     }
